@@ -111,14 +111,65 @@ body {
 }
 
 .results-carousel {
-  overflow: hidden;
+  overflow: hidden;    
+  width: 800px;
+  position: relative;
+  margin: 20px 0 20px;  
 }
 
 .results-carousel .item {
-  margin: 5px;
+  margin: 0;
   overflow: hidden;
-  padding: 20px;
-  font-size: 0;
+  width: 100%;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.results-carousel .item img {
+  width: 80%;
+  height: auto;
+  max-height: 400px; 
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.results-carousel .item img:hover {
+  transform: scale(1.02);    
+  cursor: pointer;  
+}
+
+.results-carousel .item h2 {
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+.results-carousel .nav-button {
+  position: absolute;
+  bottom: -100px;        
+  transform: none;      
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid #ddd; 
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+
+
+.results-carousel .prev-button {
+  left: 10px;
+}
+
+.results-carousel .next-button {
+  right: 10px;
 }
 
 .results-carousel video {
