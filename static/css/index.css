@@ -183,22 +183,3 @@ slider-pagination .slider-page {
 .eql-cntrb { 
   font-size: smaller;
 }
-
-details {
-  padding: 1em;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin: 1em 0;
-}
-
-summary {
-  font-weight: bold;
-  cursor: pointer;
-  padding: 0.5em 0;
-}
-
-details p {
-  margin: 1em 0;
-}
-
-
