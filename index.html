@@ -151,7 +151,7 @@
         <h2 class="title is-3">Introduction</h2>
         <div class="content has-text-justified">
           <p>
-            We introduce AgentRefine, an agent synthesis framework that enables models to learn from observations within trajectories to correct their own errors. AgentRefine significantly outperforms state-of-the-art agent tuning works in terms of generalization capabilities across diverse agent tasks. Our findings establish a relationship between agent generalization and self-improvement, offering a new paradigm for future research.
+            We introduce <b>AgentRefine</b>, an agent synthesis framework that enables models to learn from observations within trajectories to correct their own errors. <b>AgentRefine</b> significantly outperforms state-of-the-art agent tuning works in terms of generalization capabilities across diverse agent tasks. Our findings establish a relationship between agent generalization and self-improvement, offering a new paradigm for future research.
           </p>
           
           <div class="content has-text-centered">
@@ -173,7 +173,7 @@
         <h2 class="title is-3">Main Results</h2>
         <div class="content has-text-justified">
           <p>
-            The table shows the performance comparison of AgentRefine and other methods across different families and sizes.It can be observed that compared to other agent works, our method shows significant advantages in held-out tasks. For example, it leads Agent-FLAN by 13.3% in Sciworld Success Rate. Notably, in some tasks, AgentRefine can even match the performance of the GPT-4o series. This demonstrates the strong generalization capability of AgentRefine.
+            The table shows the performance comparison of <b>AgentRefine</b> and other methods across different families and sizes.It can be observed that compared to other agent works, our method shows significant advantages in held-out tasks. For example, it leads Agent-FLAN by 13.3% in Sciworld Success Rate. Notably, in some tasks, <b>AgentRefine</b> can even match the performance of the GPT-4o series. This demonstrates the strong generalization capability of <b>AgentRefine</b>.
           </p>
           
           <div class="content has-text-centered">
@@ -188,8 +188,61 @@
   </div>
 </section>
 
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Robustness Analysis</h2>
+        <div class="content has-text-justified">
+          <p>
+            We perturb the candidate actions in Alfworld ensuring that the perturbed ones consist of different tokens (or token order) but express the same semantic information. The detail perturbation rules are shown in Appendix K of the paper.
+          </p>
+          <div class="content has-text-centered">
+            <img src="static/images/103.png" alt="Robustness Analysis" style="width: 100%; max-width: 960px;">
+            <p class="caption">
+              Performance for different models across various perturbations.
+            </p>
+          </div>
+          <p>
+            It can be observed that simple data perturbation leads to a significant performance drop on the original held-in task. For example, under the average score, AgentGym’s Success Rate drops by 25.6%, while Agent-FLAN experiences an even more severe performance decline of 30.4%. Their standard deviation is close to 20%. In comparison, Our <b>AgentRefine</b> has a 3.7% increase in the average and low standard deviation, 3.73%, indicating that it learns decision-making capabilities rather than just simple memorization.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<!-- End paper abstract -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <h2 class="title is-3">Case Study</h2>
+        <div class="content has-text-justified">
+          <p>
+            The figure presents examples of Agent-FLAN and <b>AgentRefine</b> in Jericho and Sciworld. The cases show that Refinement Tuning can enhance the diversity and quality of the model’s thinking, which helps improve the model’s exploration breadth and efficiency and avoid always getting stuck in loops in a new environment.
+          </p>
+          <div class="content has-text-centered">
+            <img src="static/images/9.png" alt="Case Study" style="width: 100%; max-width: 960px;">
+            <p class="caption">
+              Comparison case study on Jericho and SciWorld between Agent-FLAN and AgentRefine.
+            </p>
+          </div>
+          <details>
+            <summary>Case Study Details</summary>
+            <p>
+              (Left) In Jericho, Agent-FLAN mistakenly believes it is not in the cell and attempts to go to cell. After failing, it chooses to check valid actions. Although check valid actions is a correct choice,Agent-FLAN does not correct its erroneous decision based on the returned results and repeats the go to cell and check valid actions error loop. In contrast, <b>AgentRefine</b>, upon realizing its actions are not achieving the goal, tries various new methods instead of endlessly repeating previously tried incorrect actions.
+            </p>
+            <p>
+              (Right) In Sciworld, Agent-FLAN ignores the hint in the Goal that the f ork is in the bedroom and chooses to search in the kitchen. Additionally, Agent-FLAN, having memorized the Alfworld dataset, attempts to output locations can only be found in Alfworld (drawer, countertop, and the action format go to {place}), which do not exist in SciWorld. Conversely, <b>AgentRefine</b> can clearly find the thermometer and decide to go bedroom to search for the f ork. After go bedroom fails, it decides to go hallway based on several rounds of observation. In T hought 6, although <b>AgentRefine</b> mistakenly believes it cannot reach the bedroom, its judgement shows it can revise its decisions using short-term memory (from turn 2). When Observation 6 provides clear information about the bedroom, <b>AgentRefine</b> can correct its wrong decision in T hought 6 and reach the bedroom. This indicates that <b>AgentRefine</b>'s improvement in results is not due to memorizing prior knowledge from training data but rather its ability to efficiently utilize and integrate multiple key pieces of information from short-term memory to correct errors in historical decisions.
+            </p>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -204,21 +257,9 @@
             </h2>
           </div>
           <div class="item">
-            <img src="static/images/3.png" alt="Experiment Analysis 2" />
-            <h2 class="subtitle has-text-centered">
-              The success rate variation via perturbation.
-            </h2>
-          </div>
-          <div class="item">
             <img src="static/images/5.png" alt="Experiment Analysis 3" />
             <h2 class="subtitle has-text-centered" >
               The model’s performance as the AgentRefine train data scales up.
-            </h2>
-          </div>
-          <div class="item">
-            <img src="static/images/6.png" alt="Experiment Analysis 4" />
-            <h2 class="subtitle has-text-centered" >
-              The t-SNE figure among AgentFLAN, AgentGym, and AgentRefine’s Thought.
             </h2>
           </div>
           <div class="item">
@@ -227,16 +268,13 @@
               The similarity heatmap between different environments in 6 sources.
             </h2>
           </div>
-          <div class="item">
-            <img src="static/images/9.png" alt="Experiment Analysis 6" />
-            <h2 class="subtitle has-text-centered" >
-              Comparison case study on Jericho and SciWorld between Agent-FLAN and AgentRefine.
-            </h2>
-          </div>
         </div>
       </div>
     </div>
   </div>
+  <p class=" is-size-5 has-text-centered">
+    For more technical details, methodology, and comprehensive experimental results, refer to our <a href="https://arxiv.org/pdf/2501.01702.pdf" target="_blank" class="has-text-weight-bold has-text-link">paper</a>.
+  </p>
 </section>
 
 <!--BibTex citation -->
@@ -254,8 +292,8 @@
 </section>
 <!--End BibTex citation -->
 
-<section>
-  <div class="section" id="org-banners" style="display:flex; justify-content: center; gap: 60px; align-items: center">
+<section class="section hero is-light" style="padding: 2rem 2rem">
+  <div class="section" id="org-banners" style="display:flex; justify-content: center; gap: 60px; align-items: center; padding: 0">
     <a href="https://www.bupt.edu.cn/" target="_blank" rel="external">
         <img class="center-block org-banner" src="static/images/BUPT.png" style="width: 250px; height: auto;">
     </a>
@@ -266,7 +304,7 @@
 </section>
 
 
-  <footer class="footer">
+  <footer class="footer has-background-light" style="margin-top: -2rem;">
   <div class="container">
     <div class="columns is-centered">
       <div class="column is-8">

@@ -151,7 +151,7 @@ body {
 
 .results-carousel .nav-button {
   position: absolute;
-  bottom: -100px;        
+  bottom: 10px;        
   transform: none;      
   background: rgba(255, 255, 255, 0.8);
   border: 1px solid #ddd; 
@@ -176,7 +176,7 @@ body {
   margin: 0;
 }
 
-.slider-pagination .slider-page {
+slider-pagination .slider-page {
   background: #000000;
 }
 
@@ -184,5 +184,21 @@ body {
   font-size: smaller;
 }
 
+details {
+  padding: 1em;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin: 1em 0;
+}
+
+summary {
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.5em 0;
+}
+
+details p {
+  margin: 1em 0;
+}
 
 
